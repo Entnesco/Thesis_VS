@@ -25,6 +25,9 @@ int generate_random_number(unsigned int lower_limit, unsigned int upper_limit);
 void genereate_data_set();
 void start_paraller_merge_sort(pthread_t threads[]);
 void merge_sort_paral(pthread_t threads[], int aggregation);
+void bubble_sort_paral();
+void merge2(int l, int m, int r);
+void merge_sort2(int l, int r);
 
 using namespace std;
 
@@ -164,4 +167,95 @@ void merge_sort_paral(pthread_t threads[], int aggregation){
     start_paraller_merge_sort(threads);
     join_threads(threads);
     merge_sections_of_array(arr, NUM_THREADS, aggregation);
+}
+
+// bubble sort
+void bubble_sort_paral()
+{
+    
+    bool zmiana; // zmienna pomocnicza do sprawdzenia, czy zaszła zmiana w kolejnym przebiegu pętli
+    do
+    {
+        zmiana = false;
+
+        // sortujemy elementy wektora równolegle za pomocą OpenMP
+        #pragma omp parallel for shared(arr, zmiana)
+        for (int i = 1; i < LENGTH; i++)
+        {
+            if (arr[i] < arr[i - 1])
+            {
+                // zamieniamy miejscami elementy, jeśli są one w złej kolejności
+                swap(arr[i], arr[i - 1]);
+                zmiana = true; // zapamiętujemy, że zaszła zmiana
+            }
+        }
+    } while (zmiana); // pętla wykonuje się tak długo, aż nie zaszła żadna zmiana w kolejnym przebiegu
+}
+
+// merge sort
+void merge2(int l, int m, int r) {
+  // Find sizes of two subarrays to be merged
+  int n1 = m - l + 1;
+  int n2 = r - m;
+
+  // Create temp arrays
+  int L[n1], R[n2];
+
+  // Copy data to temp arrays
+  for (int i = 0; i < n1; ++i) {
+    L[i] = arr[l + i];
+  }
+  for (int i = 0; i < n2; ++i) {
+    R[i] = arr[m + 1 + i];
+  }
+
+  // Merge the temp arrays back into arr[l..r]
+  int i = 0, j = 0, k = l;
+  while (i < n1 && j < n2) {
+    if (L[i] <= R[j]) {
+      arr[k] = L[i];
+      ++i;
+    } else {
+      arr[k] = R[j];
+      ++j;
+    }
+    ++k;
+  }
+
+  // Copy the remaining elements of L, if there are any
+  while (i < n1) {
+    arr[k] = L[i];
+    ++i;
+    ++k;
+  }
+
+  // Copy the remaining elements of R, if there are any
+  while (j < n2) {
+    arr[k] = R[j];
+    ++j;
+    ++k;
+  }
+}
+
+void merge_sort2(int l, int r) {
+  if (l < r) {
+    // Find the middle point
+    int m = l + (r - l) / 2;
+
+    // Split the array into two halves and sort them concurrently using OpenMP
+#pragma omp parallel sections
+    {
+#pragma omp section
+      {
+        merge_sort2(l, m);
+      }
+#pragma omp section
+      {
+        merge_sort2(m + 1, r);
+      }
+    }
+
+    // Merge the sorted halves
+    merge2(l, m, r);
+  }
 }

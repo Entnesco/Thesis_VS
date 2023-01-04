@@ -5,9 +5,11 @@
 
 using namespace std;
 
-int main()
+void bubble_sort_first();
+
+void bubble_sort_first()
 {
-    vector<int> v = {3, 2, 5, 1, 4}; // wektor do posortowania
+    int v[5] = {3, 2, 5, 1, 4}; // wektor do posortowania
 
     bool zmiana; // zmienna pomocnicza do sprawdzenia, czy zaszła zmiana w kolejnym przebiegu pętli
     do
@@ -16,7 +18,7 @@ int main()
 
         // sortujemy elementy wektora równolegle za pomocą OpenMP
         #pragma omp parallel for shared(v, zmiana)
-        for (int i = 1; i < v.size(); i++)
+        for (int i = 1; i < 5; i++)
         {
             if (v[i] < v[i - 1])
             {
@@ -31,6 +33,4 @@ int main()
     for (int x : v)
         cout << x << " ";
     cout << endl;
-
-    return 0;
 }

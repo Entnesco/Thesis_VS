@@ -1,36 +1,49 @@
+#include <algorithm>
 #include <iostream>
 #include <vector>
-#include <algorithm>
 #include <omp.h>
 
-using namespace std;
+int partition(std::vector<int>& arr, int low, int high) {
+  int pivot = arr[high];
+  int i = low - 1;
+  for (int j = low; j < high; ++j) {
+    if (arr[j] <= pivot) {
+      ++i;
+      std::swap(arr[i], arr[j]);
+    }
+  }
+  std::swap(arr[i + 1], arr[high]);
+  return i + 1;
+}
 
-int main()
-{
-    vector<int> v = {3, 2, 5, 1, 4}; // wektor do posortowania
+void quick_sort(std::vector<int>& arr, int low, int high) {
+  if (low < high) {
+    int pivot_index = partition(arr, low, high);
 
-    bool zmiana; // zmienna pomocnicza do sprawdzenia, czy zaszła zmiana w kolejnym przebiegu pętli
-    do
+    // Sort the two halves concurrently using OpenMP
+#pragma omp parallel sections
     {
-        zmiana = false;
+#pragma omp section
+      {
+        quick_sort(arr, low, pivot_index - 1);
+      }
+#pragma omp section
+      {
+        quick_sort(arr, pivot_index + 1, high);
+      }
+    }
+  }
+}
 
-        // sortujemy elementy wektora równolegle za pomocą OpenMP
-        #pragma omp parallel for shared(v, zmiana)
-        for (int i = 1; i < v.size(); i++)
-        {
-            if (v[i] < v[i - 1])
-            {
-                // zamieniamy miejscami elementy, jeśli są one w złej kolejności
-                swap(v[i], v[i - 1]);
-                zmiana = true; // zapamiętujemy, że zaszła zmiana
-            }
-        }
-    } while (zmiana); // pętla wykonuje się tak długo, aż nie zaszła żadna zmiana w kolejnym przebiegu
+int main() {
+  std::vector<int> arr = {3, 5, 1, 4, 2};
 
-    // wyświetlamy posortowany wektor
-    for (int x : v)
-        cout << x << " ";
-    cout << endl;
+  quick_sort(arr, 0, arr.size() - 1);
 
-    return 0;
+  for (int x : arr) {
+    std::cout << x << ' ';
+  }
+  std::cout << '\n';
+
+  return 0;
 }

@@ -38,8 +38,7 @@ int main(){
     //rozpoczęcie pomiaru czasu
     gettimeofday(&start, NULL);
 
-    //sortowanie merge sort równoległe
-    merge_sort_paral(threads, 1);
+    merge_sort2(0, LENGTH - 1);
 
     //koniec pomiaru czasu
     gettimeofday(&end, NULL);
