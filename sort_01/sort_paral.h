@@ -28,6 +28,8 @@ void merge_sort_paral(pthread_t threads[], int aggregation);
 void bubble_sort_paral();
 void merge2(int l, int m, int r);
 void merge_sort2(int l, int r);
+int partition(int low, int high);
+void quick_sort_parall(int low, int high);
 
 using namespace std;
 
@@ -257,5 +259,37 @@ void merge_sort2(int l, int r) {
 
     // Merge the sorted halves
     merge2(l, m, r);
+  }
+}
+
+int partition(int low, int high) {
+  int pivot = arr[high];
+  int i = low - 1;
+  for (int j = low; j < high; ++j) {
+    if (arr[j] <= pivot) {
+      ++i;
+      std::swap(arr[i], arr[j]);
+    }
+  }
+  std::swap(arr[i + 1], arr[high]);
+  return i + 1;
+}
+
+void quick_sort_parall(int low, int high) {
+  if (low < high) {
+    int pivot_index = partition(low, high);
+
+    // Sort the two halves concurrently using OpenMP
+#pragma omp parallel sections
+    {
+#pragma omp section
+      {
+        quick_sort_parall(low, pivot_index - 1);
+      }
+#pragma omp section
+      {
+        quick_sort_parall(pivot_index + 1, high);
+      }
+    }
   }
 }
