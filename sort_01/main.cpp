@@ -38,7 +38,7 @@ int main(){
     //rozpoczęcie pomiaru czasu
     gettimeofday(&start, NULL);
 
-    quick_sort_parall(0, LENGTH - 1);
+    selection_sort_parall();
 
     //koniec pomiaru czasu
     gettimeofday(&end, NULL);

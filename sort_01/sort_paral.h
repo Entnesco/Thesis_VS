@@ -30,6 +30,7 @@ void merge2(int l, int m, int r);
 void merge_sort2(int l, int r);
 int partition(int low, int high);
 void quick_sort_parall(int low, int high);
+void selection_sort_parall();
 
 using namespace std;
 
@@ -290,6 +291,26 @@ void quick_sort_parall(int low, int high) {
       {
         quick_sort_parall(pivot_index + 1, high);
       }
+    }
+  }
+}
+
+void selection_sort_parall() {
+  int n = LENGTH;
+
+  // Loop through the array and find the minimum element in each iteration
+  for (int i = 0; i < n - 1; ++i) {
+    int min_index = i;
+    for (int j = i + 1; j < n; ++j) {
+      if (arr[j] < arr[min_index]) {
+        min_index = j;
+      }
+    }
+
+    // Swap the minimum element with the current element
+#pragma omp critical
+    {
+      std::swap(arr[min_index], arr[i]);
     }
   }
 }
