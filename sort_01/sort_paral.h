@@ -195,16 +195,14 @@ void bubble_sort_paral()
     } while (zmiana); // pętla wykonuje się tak długo, aż nie zaszła żadna zmiana w kolejnym przebiegu
 }
 
-// merge sort
+// merge sort parallel 2
 void merge2(int l, int m, int r) {
-  // Find sizes of two subarrays to be merged
   int n1 = m - l + 1;
   int n2 = r - m;
 
-  // Create temp arrays
   int L[n1], R[n2];
 
-  // Copy data to temp arrays
+  //kopjuj dane do pomocniczych tablic
   for (int i = 0; i < n1; ++i) {
     L[i] = arr[l + i];
   }
@@ -212,7 +210,7 @@ void merge2(int l, int m, int r) {
     R[i] = arr[m + 1 + i];
   }
 
-  // Merge the temp arrays back into arr[l..r]
+  //łącz tablice
   int i = 0, j = 0, k = l;
   while (i < n1 && j < n2) {
     if (L[i] <= R[j]) {
@@ -225,14 +223,14 @@ void merge2(int l, int m, int r) {
     ++k;
   }
 
-  // Copy the remaining elements of L, if there are any
+  //kopiuj pozostałe elementy
   while (i < n1) {
     arr[k] = L[i];
     ++i;
     ++k;
   }
 
-  // Copy the remaining elements of R, if there are any
+  //kopiuj pozostałe elementy
   while (j < n2) {
     arr[k] = R[j];
     ++j;
@@ -242,10 +240,10 @@ void merge2(int l, int m, int r) {
 
 void merge_sort2(int l, int r) {
   if (l < r) {
-    // Find the middle point
+    //znajdz srodek
     int m = l + (r - l) / 2;
 
-    // Split the array into two halves and sort them concurrently using OpenMP
+    //podzial tablicy na dwie czesci i sortowanie rownolegle
 #pragma omp parallel sections
     {
 #pragma omp section
@@ -258,29 +256,31 @@ void merge_sort2(int l, int r) {
       }
     }
 
-    // Merge the sorted halves
+    //laczenie wczesniej podzielonych czesci
     merge2(l, m, r);
   }
 }
 
+//pojedynczy etap quic sort
 int partition(int low, int high) {
   int pivot = arr[high];
   int i = low - 1;
   for (int j = low; j < high; ++j) {
     if (arr[j] <= pivot) {
       ++i;
-      std::swap(arr[i], arr[j]);
+      swap(arr[i], arr[j]);
     }
   }
-  std::swap(arr[i + 1], arr[high]);
+  swap(arr[i + 1], arr[high]);
   return i + 1;
 }
 
+// quick sort parallel algorytm
 void quick_sort_parall(int low, int high) {
   if (low < high) {
     int pivot_index = partition(low, high);
 
-    // Sort the two halves concurrently using OpenMP
+    //sortowanie swoch częsci rownolegle
 #pragma omp parallel sections
     {
 #pragma omp section
@@ -295,10 +295,11 @@ void quick_sort_parall(int low, int high) {
   }
 }
 
+//selection sort parallel algorytm
 void selection_sort_parall() {
   int n = LENGTH;
 
-  // Loop through the array and find the minimum element in each iteration
+  //iteruj tablice i znajdz wartośc min
   for (int i = 0; i < n - 1; ++i) {
     int min_index = i;
     for (int j = i + 1; j < n; ++j) {
@@ -307,10 +308,10 @@ void selection_sort_parall() {
       }
     }
 
-    // Swap the minimum element with the current element
+    //zamien wartosc minimalna z obecna wartoscia
 #pragma omp critical
     {
-      std::swap(arr[min_index], arr[i]);
+      swap(arr[min_index], arr[i]);
     }
   }
 }
