@@ -3,8 +3,8 @@
 #include <pthread.h>
 #include "data_gen.h"
 #include "time_my.h"
-#include "sort_paral.h"
 #include "sort_seq.h"
+#include "select_sort_paral.h"
 
 /*
 Runing in terminal:
