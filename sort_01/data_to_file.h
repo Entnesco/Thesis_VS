@@ -2,16 +2,6 @@
 
 using namespace std;
 
-void save_data(string data, string filename);
-void delete_content (string filename);
-
-int main()
-{
-    save_data("dane2", "plik.txt");
-
-    return(0);
-}
-
 void save_data(string data, string filename)
 {
         fstream plik;
