@@ -3,7 +3,7 @@
 using namespace std;
 
 // bubble sort
-void bubble_sort_paral(int *arr, int length)
+void bubble_sort_parall(int *arr, int length)
 {
     
     bool zmiana; // zmienna pomocnicza do sprawdzenia, czy zaszła zmiana w kolejnym przebiegu pętli
