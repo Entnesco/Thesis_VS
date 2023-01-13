@@ -14,8 +14,9 @@ g++ -o main.exe main.cpp sort.cpp
 ./main.exe
 */
 
+#define LENGTH 500000
+#define TESTITE 100
 #define SEED  100
-#define LENGTH 1000
 #define UPPER_LIM 10000
 #define LOWER_LIM  1
 
@@ -37,11 +38,9 @@ int main(){
 
     srand(SEED);
     struct timeval  start, end;    
-    string fileName = "C://Users/Michal/Desktop/Studia/cpp/sort_01/tests/test2.txt";
-    int testIte = 100;
+    string fileName = "C://Users/Michal/Desktop/Studia/cpp/sort_01/tests/merge_sort_LENGTH_500000.txt";
 
-
-    for ( int tests = 0; tests < testIte; tests++)
+    for ( int tests = 0; tests < TESTITE; tests++)
     {
         int *arr = new int[LENGTH];
 
@@ -51,7 +50,7 @@ int main(){
         //rozpoczęcie pomiaru czasu
         gettimeofday(&start, NULL);
 
-        selection_sort_parall(arr, LENGTH);
+        merge_sort_parall(arr, 0, LENGTH-1);
 
         //koniec pomiaru czasu
         gettimeofday(&end, NULL);
