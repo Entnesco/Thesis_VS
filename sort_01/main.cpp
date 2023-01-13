@@ -6,6 +6,7 @@
 #include "bubble_sort_paral.h"
 #include "quick_sort_paral.h"
 #include "select_sort_paral.h"
+#include "data_to_file.h"
 
 /*
 Runing in terminal:
@@ -35,25 +36,34 @@ int main(){
     // Gen.printTab();
 
     srand(SEED);
-    struct timeval  start, end;
-    int *arr = new int[LENGTH];
+    struct timeval  start, end;    
+    string fileName = "C://Users/Michal/Desktop/Studia/cpp/sort_01/tests/test2.txt";
+    int testIte = 100;
 
-    // wygenerowanie zbioru danych - tablica z losowymi wartosciami zawierającymi się w wyznaczonym zakresie wartości
-    genereate_data_set(arr, LENGTH, LOWER_LIM, UPPER_LIM);
 
-    //rozpoczęcie pomiaru czasu
-    gettimeofday(&start, NULL);
+    for ( int tests = 0; tests < testIte; tests++)
+    {
+        int *arr = new int[LENGTH];
 
-    selection_sort_parall(arr, LENGTH);
+        // wygenerowanie zbioru danych - tablica z losowymi wartosciami zawierającymi się w wyznaczonym zakresie wartości
+        genereate_data_set(arr, LENGTH, LOWER_LIM, UPPER_LIM);
 
-    //koniec pomiaru czasu
-    gettimeofday(&end, NULL);
+        //rozpoczęcie pomiaru czasu
+        gettimeofday(&start, NULL);
 
-    //prezentacja wyników w terminalu
-    print_array(arr, LENGTH);
-    print_time(start, end);
+        selection_sort_parall(arr, LENGTH);
 
-    delete [] arr;
+        //koniec pomiaru czasu
+        gettimeofday(&end, NULL);
+
+        //prezentacja wyników w terminalu
+        // print_array(arr, LENGTH);
+        save_data(to_string(print_time(start, end)), fileName);
+        
+
+        delete [] arr;
+
+    }
 
 
     return 0;

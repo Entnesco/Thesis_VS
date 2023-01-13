@@ -31,9 +31,10 @@ void print_array(int *arr, int length){
 }
 
 //obliczenie oraz prezentacja czasu operacji
-void print_time(struct timeval start, struct timeval end){
+double print_time(struct timeval start, struct timeval end){
 	double time_spent;
     time_spent = ((double) ((double) (end.tv_usec - start.tv_usec) / 1000000 +
                             (double) (end.tv_sec - start.tv_sec)));
     cout << "Time taken for execution: " << time_spent<< " seconds\n";
+    return time_spent;
 }
