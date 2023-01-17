@@ -1,0 +1,2 @@
+C://Users/Michal/Desktop/Studia/cpp/sort_01/tests/selection_sort_diff_seed_LENGTH_10000.txt
+0.100305
