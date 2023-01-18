@@ -1,2 +1,8 @@
 C://Users/Michal/Desktop/Studia/cpp/sort_01/tests/selection_sort_diff_seed_LENGTH_10000.txt
 0.100305
+C://Users/Michal/Desktop/Studia/cpp/sort_01/tests/part_1/C://Users/Michal/Desktop/Studia/cpp/sort_01/tests/part_1/length_10000_testite_10_upperlim_10000_diffseed.txt
+0.100693
+C://Users/Michal/Desktop/Studia/cpp/sort_01/tests/part_1/C://Users/Michal/Desktop/Studia/cpp/sort_01/tests/part_1/length_10000testite_10upperlim_10000diffseed.txt
+0.100267
+C://Users/Michal/Desktop/Studia/cpp/sort_01/tests/part_1/C://Users/Michal/Desktop/Studia/cpp/sort_01/tests/part_1/length_10000testite_10upperlim_10000diffseed.txt
+0.100757

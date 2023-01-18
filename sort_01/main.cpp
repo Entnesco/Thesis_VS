@@ -15,9 +15,9 @@ g++ -o main.exe main.cpp sort.cpp
 */
 
 #define LENGTH 10000
-#define TESTITE 100
-#define SEED  100
+#define TESTITE 10
 #define UPPER_LIM 10000
+#define SEED  100
 #define LOWER_LIM  1
 
 using namespace std;
@@ -38,8 +38,12 @@ int main(){
 
     // srand(SEED);
     struct timeval  start, end;    
-    string fileName = "C://Users/Michal/Desktop/Studia/cpp/sort_01/tests/selection_sort_diff_seed_LENGTH_10000.txt";
+    string path = "C://Users/Michal/Desktop/Studia/cpp/sort_01/tests/part_1/";
+    string name = path + "length_" + to_string(LENGTH) + "_testite_" + to_string(TESTITE) + "_upperlim_" + to_string(UPPER_LIM) + "_diffseed" + ".txt";
+    string fileName = path + name;
     double sumResults = 0;
+
+    cout << fileName;
 
     for ( int tests = 0; tests < TESTITE; tests++)
     {
@@ -59,9 +63,11 @@ int main(){
 
         //prezentacja wyników w terminalu
         // print_array(arr, LENGTH);
+        
         save_data(to_string(print_time(start, end)), fileName);
 
         sumResults += print_time(start, end);
+        
 
         delete [] arr;
 
