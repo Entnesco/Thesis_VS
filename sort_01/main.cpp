@@ -15,14 +15,14 @@ g++ -o main.exe main.cpp sort.cpp
 */
 
 
-#define LENGTH_MIN 100
-#define LENGTH_MAX 1000
-#define LENGTH_STEP 100
+#define LENGTH_MIN 1000
+#define LENGTH_MAX 10000
+#define LENGTH_STEP 1000
 #define TESTITE 10
 #define UPPER_LIM 1000
 #define LOWER_LIM  1
 #define SEED  100
-string algortih_name = "selection_sort_parall";
+string algortih_name = "quick_sort_parall";
 
 using namespace std;
 
@@ -42,7 +42,7 @@ int main(){
 
     // srand(SEED);
     struct timeval  start, end;  
-    string test_type = algortih_name + " lengthmin = " + to_string(LENGTH_MIN) + " lengthmax = " + to_string(LENGTH_MAX) + " testite = " + to_string(TESTITE) + " upperlim = " + to_string(UPPER_LIM) + " diffseed";
+    string test_type = algortih_name + ";lengthmin=" + to_string(LENGTH_MIN) + ";lengthmax=" + to_string(LENGTH_MAX) + ";testite=" + to_string(TESTITE) + ";upperlim=" + to_string(UPPER_LIM) + ";diffseed";
     save_data(test_type, "C://Users/Michal/Desktop/Studia/cpp/sort_01/tests/part_2/Result.txt");
     save_data("seconds  length", "C://Users/Michal/Desktop/Studia/cpp/sort_01/tests/part_2/Result.txt");
 
@@ -64,7 +64,7 @@ int main(){
             //rozpoczęcie pomiaru czasu
             gettimeofday(&start, NULL);
 
-            selection_sort_parall(arr, length);
+            quick_sort_parall(arr, 0,length-1);
 
             //koniec pomiaru czasu
             gettimeofday(&end, NULL);
