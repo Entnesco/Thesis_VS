@@ -1,0 +1,23 @@
+selection_sort_parall lengthmin = 100 lengthmax = 1000 testite = 10 upperlim = 1000 diffseed
+0.000156  100
+0.001051  200
+0.003197  300
+0.007318  400
+0.014285  500
+0.023882  600
+0.037883  700
+0.055554  800
+0.078187  900
+0.107282  1000
+selection_sort_parall lengthmin = 100 lengthmax = 1000 testite = 10 upperlim = 1000 diffseed
+seconds  length
+0.000145  100
+0.001017  200
+0.003253  300
+0.007408  400
+0.014090  500
+0.024563  600
+0.037601  700
+0.055888  800
+0.077579  900
+0.106591  1000
