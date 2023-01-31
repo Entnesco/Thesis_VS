@@ -1,2 +1,0 @@
-
-            gettimeofday(&end, NULL);

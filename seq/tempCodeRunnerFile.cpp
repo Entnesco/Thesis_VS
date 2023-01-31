@@ -1,2 +1,0 @@
-
-    if(plik.good() == true)

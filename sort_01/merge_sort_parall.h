@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -7,7 +8,7 @@ void merge_parall(int *arr, int l, int m, int r) {
   int n1 = m - l + 1;
   int n2 = r - m;
 
-  int L[n1], R[n2];
+  vector<int> L(n1), R(n2);
 
   //kopjuj dane do pomocniczych tablic
   for (int i = 0; i < n1; ++i) {

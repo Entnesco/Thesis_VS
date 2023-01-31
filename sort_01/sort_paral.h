@@ -4,7 +4,7 @@ Biblioteka sort_paral.h zawiera implementacje algorytmów sortowanie równoległ
 
 #include <iostream>
 #include <stdlib.h>
-#include <sys/time.h>
+//#include <sys/time.h>
 
 int generate_random_number(unsigned int lower_limit, unsigned int upper_limit);
 void genereate_data_set(unsigned int lower_limit, unsigned int upper_limit);
@@ -31,10 +31,10 @@ void print_array(int *arr, int length){
 }
 
 //obliczenie oraz prezentacja czasu operacji
-double print_time(struct timeval start, struct timeval end){
-	double time_spent;
-    time_spent = ((double) ((double) (end.tv_usec - start.tv_usec) / 1000000 +
-                            (double) (end.tv_sec - start.tv_sec)));
-    cout << "Time taken for execution: " << time_spent<< " seconds\n";
-    return time_spent;
-}
+//double print_time(struct timeval start, struct timeval end){
+//	double time_spent;
+//    time_spent = ((double) ((double) (end.tv_usec - start.tv_usec) / 1000000 +
+//                            (double) (end.tv_sec - start.tv_sec)));
+//    cout << "Time taken for execution: " << time_spent<< " seconds\n";
+//    return time_spent;
+//}
